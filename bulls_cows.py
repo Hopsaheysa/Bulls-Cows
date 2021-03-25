@@ -76,6 +76,7 @@ def result_file(nr_of_guesses, times) -> None:
     also save the results to txt file
     """
     name = input('Enter your name to the scoreboard: ')
+    header = ['Guesses', 'Name', 'Time']
     result = [nr_of_guesses, name, times]
     result_print = ''
     # if the .txt file doesn't exist it is created in the same folder as .py file
@@ -88,27 +89,22 @@ def result_file(nr_of_guesses, times) -> None:
         result_list = result_string.split()
     # if the file is empty it creates 'header'
     if not result_list:
-        result_list.append('Guesses')
-        result_list.append('Name')
-        result_list.append('Time')
+        result_list.extend(header)
     list_size = len(result_list) - 1
 
     if list_size < 3:
-        for i in range(3):
-            result_list.append(result[i])
+        result_list.extend(result)
     else:
         for index in range(3, list_size + 1):
             if index % 3 == 0:
                 if (int(result_list[index]) > result[0] or int(result_list[index]) == result[0]
                         and float(result_list[index + 2]) > float(result[2])):
-                    for i in range(3):
-                        result_list.insert(index + i, result[i])
+                    result_list[index:index] = result
                     break
             elif index == list_size:
                 print(index)
                 print(list_size)
-                for i in range(3):
-                    result_list.append(result[i])
+                result_list.extend(result)
     # from list -> string
     for word in result_list:
         result_print += str(word) + ' '
@@ -143,6 +139,7 @@ print(underlining)
 random_number = get_number()
 returned_guess = 0
 start = time.time()
+print(random_number)
 while random_number != returned_guess:
     returned_guess = get_guess()
     comparison(random_number, returned_guess)
