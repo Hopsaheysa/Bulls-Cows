@@ -102,8 +102,6 @@ def result_file(nr_of_guesses, times) -> None:
                     result_list[index:index] = result
                     break
             elif index == list_size:
-                print(index)
-                print(list_size)
                 result_list.extend(result)
     # from list -> string
     for word in result_list:
@@ -139,7 +137,6 @@ print(underlining)
 random_number = get_number()
 returned_guess = 0
 start = time.time()
-print(random_number)
 while random_number != returned_guess:
     returned_guess = get_guess()
     comparison(random_number, returned_guess)
